@@ -20,9 +20,34 @@ def render(init_board):
     print("  ---------")
 
 
+def get_move():
+    x = int(input("What is your move's X co-ordinate?: "))
+    y = int(input("What is your move's Y co-ordinate?: "))
+
+    return x, y
+
+
+def make_move(init_board, cords, symbol):
+    temp_board = init_board
+    x, y = cords
+
+    temp_board[y][x] = symbol
+
+    return temp_board
+
+
+def is_valid_move(init_board, cords):
+    return init_board[cords[1]][cords[0]] is None
+
+
 board = new_board()
+board[0][0] = "X"
 
-board[0][2] = "X"
-board[2][1] = "O"
+move_coords = None
+while True:
+    move_coords = get_move()
+    if is_valid_move(board, move_coords):
+        break
+    else:
+        print("Invalid move, try again")
 
-render(board)
