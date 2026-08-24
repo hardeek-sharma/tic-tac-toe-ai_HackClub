@@ -40,14 +40,28 @@ def is_valid_move(init_board, cords):
     return init_board[cords[1]][cords[0]] is None
 
 
-board = new_board()
-board[0][0] = "X"
+if __name__ == '__main__':
+    player1 = "X"
+    player2 = "O"
+    current_player = player1
 
-move_coords = None
-while True:
-    move_coords = get_move()
-    if is_valid_move(board, move_coords):
-        break
-    else:
-        print("Invalid move, try again")
+    board = new_board()
 
+    while True:
+        print("---------------")
+        print(f"Player '{current_player}' turn")
+        print("---------------")
+
+        render(board)
+
+        move_coords = None
+        while True:
+            move_coords = get_move()
+            if is_valid_move(board, move_coords):
+                break
+            else:
+                print("Invalid move, try again")
+
+        board = make_move(board, move_coords, current_player)
+
+        current_player = player2 if current_player == player1 else player1
