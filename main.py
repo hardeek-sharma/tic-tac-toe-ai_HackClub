@@ -1,3 +1,6 @@
+RED = "\033[31m"
+RESET = "\033[0m"
+
 def new_board():
     return [[None, None, None],
             [None, None, None],
@@ -21,8 +24,26 @@ def render(init_board):
 
 
 def get_move():
-    x = int(input("What is your move's X co-ordinate?: "))
-    y = int(input("What is your move's Y co-ordinate?: "))
+    x = None
+    y = None
+
+    while True:
+        try:
+            x = int(input("What is your move's X co-ordinate?: "))
+            if x > 2 or x < 0:
+                print(f"{RED} Number has to be between 0-2 {RESET}")
+                continue
+
+            y = int(input("What is your move's Y co-ordinate?: "))
+            if y > 2 or y < 0:
+                print(f"{RED} Number has to between 0-2 {RESET}")
+                continue
+            else:
+                break
+
+        except ValueError:
+            print(f"{RED} Enter a NUMBER {RESET}")
+            continue
 
     return x, y
 
@@ -94,7 +115,7 @@ if __name__ == '__main__':
             if is_valid_move(board, move_coords):
                 break
             else:
-                print("Invalid move, try again")
+                print(f"{RED} Invalid move, try again {RESET}")
 
         board = make_move(board, move_coords, current_player)
 
