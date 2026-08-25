@@ -113,7 +113,7 @@ def random_ai(init_board, symbol):
     return random.choice(get_legal_moves(init_board))
 
 
-def finds_winning_moves_ai(init_board, symbol):
+def find_winning_move(init_board, symbol):
     legal_moves = get_legal_moves(init_board)
     print(legal_moves)
 
@@ -124,6 +124,41 @@ def finds_winning_moves_ai(init_board, symbol):
             return x, y
 
         init_board[y][x] = None
+
+    return None
+
+
+def find_losing_move(init_board, symbol):
+    symbol = player1 if symbol == player2 else player2
+    legal_moves = get_legal_moves(init_board)
+    print(legal_moves)
+
+    for x, y in legal_moves:
+        init_board = make_move(init_board, (x, y), symbol)
+        if get_winner(init_board) == symbol:
+            init_board[y][x] = None
+            return x, y
+
+        init_board[y][x] = None
+
+    return None
+
+
+def finds_winning_moves_ai(init_board, symbol):
+    winning_move = find_winning_move(init_board, symbol)
+    if winning_move:
+        return winning_move
+    return random_ai(init_board, symbol)
+
+
+def finds_winning_and_losing_moves_ai(init_board, symbol):
+    winning_move = find_winning_move(init_board, symbol)
+    if winning_move:
+        return winning_move
+
+    losing_move = find_losing_move(init_board, symbol)
+    if losing_move:
+        return losing_move
 
     return random_ai(init_board, symbol)
 
@@ -145,8 +180,9 @@ if __name__ == '__main__':
         move_coords = None
         while True:
             # move_coords = get_move() # local 1 v 1
-            # move_coords = random_ai() # Random moves
-            move_coords = finds_winning_moves_ai(board, current_player) # Finds winning move
+            # move_coords = random_ai()
+            # move_coords = finds_winning_moves_ai(board, current_player)
+            move_coords = finds_winning_and_losing_moves_ai(board, current_player)
             if is_valid_move(board, move_coords):
                 break
             else:
