@@ -26,7 +26,7 @@ def render(init_board):
     print("  ---------")
 
 
-def get_move():
+def human_player(init_board, symbol):
     x = None
     y = None
 
@@ -179,8 +179,8 @@ if __name__ == '__main__':
 
         move_coords = None
         while True:
-            # move_coords = get_move() # local 1 v 1
-            # move_coords = random_ai()
+            # move_coords = human_player(board, current_player)
+            # move_coords = random_ai(board, current_player)
             # move_coords = finds_winning_moves_ai(board, current_player)
             move_coords = finds_winning_and_losing_moves_ai(board, current_player)
             if is_valid_move(board, move_coords):
