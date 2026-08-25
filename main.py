@@ -1,5 +1,8 @@
+import random
+
 RED = "\033[31m"
 RESET = "\033[0m"
+
 
 def new_board():
     return [[None, None, None],
@@ -50,7 +53,9 @@ def get_move():
 
 def make_move(init_board, cords, symbol):
     temp_board = init_board
-    x, y = cords
+    x = cords[0]
+    y = cords[1]
+    # x, y = cords
 
     temp_board[y][x] = symbol
 
@@ -64,24 +69,24 @@ def is_valid_move(init_board, cords):
 def get_winner(init_board):
     # Rows
     for row in init_board:
-        if set(row) == 1:
+        if len(set(row)) == 1 and row[0] is not None:
             return row[0]
 
     # Columns
-    if len({init_board[0][0], init_board[1][0], init_board[2][0]}) == 1:
+    if len({init_board[0][0], init_board[1][0], init_board[2][0]}) == 1 and init_board[0][0] is not None:
         return init_board[0][0]
 
-    if len({init_board[0][1], init_board[1][1], init_board[2][1]}) == 1:
+    if len({init_board[0][1], init_board[1][1], init_board[2][1]}) == 1 and init_board[0][1] is not None:
         return init_board[0][1]
 
-    if len({init_board[0][2], init_board[1][2], init_board[2][2]}) == 1:
+    if len({init_board[0][2], init_board[1][2], init_board[2][2]}) == 1 and init_board[0][2] is not None:
         return init_board[0][2]
 
     # Diagonals
-    if len({init_board[0][0], init_board[1][1], init_board[2][2]}) == 1:
+    if len({init_board[0][0], init_board[1][1], init_board[2][2]}) == 1 and init_board[0][0] is not None:
         return init_board[0][0]
 
-    if len({init_board[0][2], init_board[1][1], init_board[0][2]}) == 1:
+    if len({init_board[0][2], init_board[1][1], init_board[2][0]}) == 1 and init_board[0][2] is not None:
         return init_board[0][2]
 
     return None
@@ -95,6 +100,19 @@ def check_draw(init_board):
     return True
 
 
+def get_legal_moves(init_board):
+    legal_moves = []
+    for r_indx, row in enumerate(init_board):
+        for c_indx, space in enumerate(row):
+            if space is None:
+                legal_moves.append((c_indx, r_indx))
+    return legal_moves
+
+
+def random_ai(init_board, symbol):
+    return random.choice(get_legal_moves(init_board))
+
+
 if __name__ == '__main__':
     player1 = "X"
     player2 = "O"
@@ -103,7 +121,7 @@ if __name__ == '__main__':
     board = new_board()
 
     while True:
-        print("---------------")
+        print("***************")
         print(f"Player '{current_player}' turn")
         print("---------------")
 
@@ -111,22 +129,24 @@ if __name__ == '__main__':
 
         move_coords = None
         while True:
-            move_coords = get_move()
+            # move_coords = get_move() # If activated and next line is commented than enabled local 1 v 1
+            move_coords = random_ai(board, current_player)
             if is_valid_move(board, move_coords):
                 break
             else:
                 print(f"{RED} Invalid move, try again {RESET}")
 
         board = make_move(board, move_coords, current_player)
-
-        current_player = player2 if current_player == player1 else player1
-
         winner = get_winner(board)
         if winner is not None:
+            render(board)
             print(f"Player {winner} Won!!!")
             break
 
         if check_draw(board):
+            render(board)
             print("Game Over")
             print("Draw")
             break
+
+        current_player = player2 if current_player == player1 else player1
