@@ -115,7 +115,6 @@ def random_ai(init_board, symbol):
 
 def find_winning_move(init_board, symbol):
     legal_moves = get_legal_moves(init_board)
-    print(legal_moves)
 
     for x, y in legal_moves:
         init_board = make_move(init_board, (x, y), symbol)
@@ -131,7 +130,6 @@ def find_winning_move(init_board, symbol):
 def find_losing_move(init_board, symbol):
     symbol = player1 if symbol == player2 else player2
     legal_moves = get_legal_moves(init_board)
-    print(legal_moves)
 
     for x, y in legal_moves:
         init_board = make_move(init_board, (x, y), symbol)
@@ -166,7 +164,7 @@ def finds_winning_and_losing_moves_ai(init_board, symbol):
 if __name__ == '__main__':
     player1 = "X"
     player2 = "O"
-    current_player = player1
+    current_player = random.choice((player1, player2))
 
     board = new_board()
 
@@ -191,14 +189,17 @@ if __name__ == '__main__':
         board = make_move(board, move_coords, current_player)
         winner = get_winner(board)
         if winner is not None:
+            print("***************")
+            print(f" Player {winner} Wins")
+            print("---------------")
             render(board)
-            print(f"Player {winner} Won!!!")
             break
 
         if check_draw(board):
+            print("***************")
+            print("     DRAW")
+            print("---------------")
             render(board)
-            print("Game Over")
-            print("Draw")
             break
 
         current_player = player2 if current_player == player1 else player1
