@@ -113,6 +113,21 @@ def random_ai(init_board, symbol):
     return random.choice(get_legal_moves(init_board))
 
 
+def finds_winning_moves_ai(init_board, symbol):
+    legal_moves = get_legal_moves(init_board)
+    print(legal_moves)
+
+    for x, y in legal_moves:
+        init_board = make_move(init_board, (x, y), symbol)
+        if get_winner(init_board) == symbol:
+            init_board[y][x] = None
+            return x, y
+
+        init_board[y][x] = None
+
+    return random_ai(init_board, symbol)
+
+
 if __name__ == '__main__':
     player1 = "X"
     player2 = "O"
@@ -129,8 +144,9 @@ if __name__ == '__main__':
 
         move_coords = None
         while True:
-            # move_coords = get_move() # If activated and next line is commented than enabled local 1 v 1
-            move_coords = random_ai(board, current_player)
+            # move_coords = get_move() # local 1 v 1
+            # move_coords = random_ai() # Random moves
+            move_coords = finds_winning_moves_ai(board, current_player) # Finds winning move
             if is_valid_move(board, move_coords):
                 break
             else:
