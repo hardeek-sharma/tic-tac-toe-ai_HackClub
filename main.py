@@ -2,6 +2,7 @@ import random
 
 RED = "\033[31m"
 RESET = "\033[0m"
+MODES = ("human", "dumb-bot", "smart-bot", "genius-bot")
 
 
 def new_board():
@@ -41,8 +42,8 @@ def human_player(init_board, symbol):
             if y > 2 or y < 0:
                 print(f"{RED} Number has to between 0-2 {RESET}")
                 continue
-            else:
-                break
+
+            break
 
         except ValueError:
             print(f"{RED} Enter a NUMBER {RESET}")
@@ -161,10 +162,37 @@ def finds_winning_and_losing_moves_ai(init_board, symbol):
     return random_ai(init_board, symbol)
 
 
+def use_mode(mode, init_board, symbol):
+    if mode == "human":
+        return human_player(init_board, symbol)
+    if mode == "dumb-bot":
+        return random_ai(init_board, symbol)
+    if mode == "smart-bot":
+        return finds_winning_moves_ai(init_board, symbol)
+    if mode == "genius-bot":
+        return finds_winning_and_losing_moves_ai(init_board, symbol)
+    return None
+
+
 if __name__ == '__main__':
     player1 = "X"
     player2 = "O"
     current_player = random.choice((player1, player2))
+
+    print(MODES)
+    player1_mode = None
+    player2_mode = None
+    while True:
+        player1_mode = input(f"What will player '{player1}' be: ")
+        if player1_mode not in MODES:
+            print(f"{RED} Mode has to be {MODES} {RESET}")
+            continue
+        player2_mode = input(f"What will player '{player2}' be: ")
+        if player2_mode not in MODES:
+            print(f"{RED} Mode has to be {MODES} {RESET}")
+            continue
+        break
+
 
     board = new_board()
 
@@ -177,10 +205,11 @@ if __name__ == '__main__':
 
         move_coords = None
         while True:
-            # move_coords = human_player(board, current_player)
-            # move_coords = random_ai(board, current_player)
-            # move_coords = finds_winning_moves_ai(board, current_player)
-            move_coords = finds_winning_and_losing_moves_ai(board, current_player)
+            if current_player == player1:
+                move_coords = use_mode(player1_mode, board, current_player)
+            elif current_player == player2:
+                move_coords = use_mode(player2_mode, board, current_player)
+
             if is_valid_move(board, move_coords):
                 break
             else:
@@ -197,7 +226,7 @@ if __name__ == '__main__':
 
         if check_draw(board):
             print("***************")
-            print("     DRAW")
+            print("     DRAW      ")
             print("---------------")
             render(board)
             break
