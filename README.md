@@ -3,8 +3,6 @@ A game of tic-tac-toe that is playable in the terminal.
 
 <img src="https://imgur.com/Y8aZ1A9.jpeg" width="899" alt="A game tic-tac-toe in play">
 
-<br>
-
 <a href="https://www.programiz.com/online-compiler/86Vl8K9V1ondM">
   <img src="https://img.shields.io/badge/Test_out_program-blue" alt="Button Text">
 </a>
