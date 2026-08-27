@@ -177,7 +177,7 @@ def use_mode(mode, init_board, symbol):
 if __name__ == '__main__':
     player1 = "X"
     player2 = "O"
-    current_player = random.choice((player1, player2))
+    current_player = player1
 
     print(MODES)
     player1_mode = None
