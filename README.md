@@ -23,3 +23,12 @@ does random moves until it sees a win, like the smart bot, but also finds out if
 blocks their win.
 
 You can also put bots against each other if you want to test out how different bots react to see how they work.
+
+## How to Run
+
+1. Go to the [Releases](https://github.com/hardeek-sharma/tic-tac-toe-ai_HackClub/releases/tag/v1.0.0) page.
+2. Download the main file from the latest release.
+3. Give the file permission to execute (mac or linux)
+4. run ./main in terminal to run
+
+or just download the whole repository and run python3 main.py
