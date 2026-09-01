@@ -3,13 +3,11 @@ A game of tic-tac-toe that is playable in the terminal.
 
 <img src="https://imgur.com/Y8aZ1A9.jpeg" width="899" alt="A game tic-tac-toe in play">
 
-<a href="https://www.programiz.com/online-compiler/86Vl8K9V1ondM">
-  <img src="https://img.shields.io/badge/Test_out_program-blue" alt="Button Text">
-</a>
-
-<a href="/main.py" download>
-  <img src="https://img.shields.io/badge/Download-green" alt="Button Text">
-</a>
+<p align="left">
+  <a href="https://github.com/hardeek-sharma/tic-tac-toe-ai_HackClub/releases/latest">
+    <img src="https://img.shields.io/badge/Download_Latest_Release-green?style=for-the-badge&logo=github" alt="Download Executable">
+  </a>
+</p>
 
 <br>
 <br>
@@ -31,4 +29,4 @@ You can also put bots against each other if you want to test out how different b
 3. Give the file permission to execute (mac or linux)
 4. run ./main in terminal to run
 
-or just download the whole repository and run python3 main.py
+or just download the whole repository or code and run python3 main.py
