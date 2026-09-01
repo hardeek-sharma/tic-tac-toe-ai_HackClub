@@ -9,9 +9,6 @@ A game of tic-tac-toe that is playable in the terminal.
   </a>
 </p>
 
-<br>
-<br>
-
 This is a tic-tac-toe remake that works in the termial of the user. The program gives you four options on who to play,  
 human, dumb-bot, smart-bot, genius-bot.
 
