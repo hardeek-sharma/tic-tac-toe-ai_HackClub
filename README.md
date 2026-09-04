@@ -22,4 +22,5 @@ You can also put bots against each other if you want to test out how different b
 4. run ./main in terminal to run
 
 (Windows & Linux)
+
 just download the whole repository or code fuke and run python3 main.py
